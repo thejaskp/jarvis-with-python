@@ -73,7 +73,7 @@ if __name__ == "__main__":
             while True:
                 ret, img = cap.read()
                 cv2.imshow('webcam', img)
-                k = cv2.waitkey(50)
+                k = cv2.waitKey(50)
                 if k == 27:
                     break;
             cap.release()
