@@ -3,6 +3,10 @@ import speech_recognition as sr
 import datetime
 import os
 import cv2
+import random
+from requests import get
+import wikipedia
+import webbrowser
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
@@ -75,6 +79,25 @@ if __name__ == "__main__":
                 cv2.imshow('webcam', img)
                 k = cv2.waitKey(50)
                 if k == 27:
-                    break;
+                    break
             cap.release()
             cv2.destroyAllWindows()
+
+        elif "play music" in query:
+            music_dir = "C:\\Users\\ASUS\\Music"
+            songs = os.listdir(music_dir)
+            rd = random.choice(songs)
+            os.startfile(os.path.join(music_dir, rd))
+
+        elif "ip address" in query:
+            ip = get("https://api.ipify.org").text
+            speak(f"your ip address is {ip}")
+
+        elif "wikipedia" in query:
+            speak("Searching wikipedia...")
+            query = query.replace("wikipedia", "")
+            results = wikipedia.summary(query, sentences=2)
+            speak("according to wikipedia" + results)
+
+        elif "open youtube" in query:
+            webbrowser.open("www.youtube.com")
