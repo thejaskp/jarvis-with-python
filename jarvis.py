@@ -93,6 +93,11 @@ if __name__ == "__main__":
             ip = get("https://api.ipify.org").text
             speak(f"your ip address is {ip}")
 
+        elif "ip location" in query:
+            ip = get("https://api.ipify.org").text
+            ipl = get(f"http://www.geoplugin.net/json.gp?ip={ip}")
+            speak(f"your location is {ipl}")
+
         elif "wikipedia" in query:
             speak("Searching wikipedia...")
             query = query.replace("wikipedia", "")
